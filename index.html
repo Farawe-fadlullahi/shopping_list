@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cart list</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .body{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            background-image: url(cart\ bg.avif);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #inpa,#inpb,#inpc,button,table{
+            margin-top: 30px;
+        }
+        #display::-webkit-scrollbar{
+            background-color: rgba(0, 0, 255, 0);
+        }
+        #display{
+            background-color: rgba(236, 234, 230, 0.137);
+        }
+        #upper{
+            height: 150px;
+        }
+        @media(max-width:470px){
+            #upper{
+                display: flex;
+                flex-direction: column;
+                background-color: aquamarine;
+                margin-top: -130px;
+            }
+            #display{
+                margin-bottom: -50px;
+            }
+        }
+        
+    </style>
+</head>
+
+<body >
+    <div class="body">
+        <div id="upper">
+            <h1 style="font-family: cursive; margin: 0 0 0 55px;" >ACE shopping list</h1>
+            <!-- <input id="" type="text" placeholder="brand"> -->
+            <select name="aa" style="background-color: rgba(0, 0, 0, 0.514); color: white; padding: 5px; border-radius: 6px;" id="inpa">
+                <option value="">brand</option>
+                <option value="shoe">shoe</option>
+                <option value="bag">bag</option>
+                <option value="jean">jean</option>
+                <option value="cap">cap</option>
+            </select>
+            <input id="inpb" type="number" placeholder="quantity">
+            <!-- <input id="inpc" type="number" placeholder="price in(#)"> -->
+            <select name="aa" style="background-color: rgba(0, 0, 0, 0.514); color: white; padding: 5px; border-radius: 6px;" id="inpc">
+                <option value="">price in(#)</option>
+                <option value="5000">#5000</option>
+                <option value="15000">#15000</option>
+                <option value="20000">#20000</option>
+                <option value="3000">#3000</option>
+            </select>
+            <button style="background-color: black; color: white ; border: 1px solid white; border-radius: 4px; padding: 5px;" onclick="add_list()">add to list</button>
+        </div>
+        <div id="display" style="overflow-y: scroll; height: 40vh;">
+            <table style="border: 2px solid black;border-collapse: collapse; padding: 20px;">
+                <thead style="border: 2px solid black;">
+                    <th style="border: 2px solid black; border-collapse: collapse; padding: 10px"  >s/n</th>
+                    <th style="border: 2px solid black; border-collapse: collapse; padding: 10px"  >brand</th>
+                    <th style="border: 2px solid black; border-collapse: collapse; padding: 10px"  >quantity</th>
+                    <th style="border: 2px solid black; border-collapse: collapse; padding: 10px"  >price per one</th>
+                    <th style="border: 2px solid black; border-collapse: collapse; padding: 10px"  > total price</th>
+                    <th style="border: 2px solid black; border-collapse: collapse; padding: 10px"  > actions</th>
+                </thead>
+                <tbody style="border: 2px solid black;border-collapse: collapse; padding: 10px " id="tbody">
+    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    let tbody=document.getElementById('tbody')
+    let cartList = []
+    function add_list() {
+        let cart = {
+            brand: inpa.value,
+            quantity: inpb.value,
+            price: inpc.value
+        }
+        cartList.push(cart)
+        tbody.innerHTML = ''
+         disp()
+    }
+    function disp() {
+        // cartList.forEach(function ({brand,quantity,price} , i) {
+         
+        //  tbody.innerHTML+= `<tr><td  style="border: 2px solid black; border-collapse: collapse; padding: 10px ">${i+1}</td> <td style="border: 2px solid black; border-collapse: collapse; padding: 10px ">${brand} </td> <td style="border: 2px solid black;padding: 10px">${quantity }</td> <td style="border: 2px solid black;"padding: 10px>${price} </td><td style="border: 2px solid black;"padding: 10px>${quantity * price} </td><td  style="border: 2px solid black; border-collapse: collapse; padding: 10px "><button onclick="" >edit</button><button onclick="remove(${i}) " >delete</button></td></tr> `
+        // })
+        for (let i = 0; i < cartList.length; i++) {
+            tbody.innerHTML+= `<tr><td  style="border: 2px solid black; border-collapse: collapse; padding: 10px ">${i+1}</td> <td style="border: 2px solid black; border-collapse: collapse; padding: 10px ">${inpa.value} </td> <td style="border: 2px solid black;padding: 10px">${inpb.value }</td> <td style="border: 2px solid black;"padding: 10px>${inpc.value} </td><td style="border: 2px solid black;"padding: 10px>${inpb.value * inpc.value} </td><td  style="border: 2px solid black; border-collapse: collapse; padding: 10px "><button onclick="" >edit</button><button onclick="remove(${i}) " >delete</button></td></tr> `
+        }
+    }
+    function remove (i) {
+
+        cartList.splice(i ,1)
+        console.log(cartList);
+        tbody.innerHTML = ''
+         disp()
+    }
+</script>
